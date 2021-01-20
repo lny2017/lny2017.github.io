@@ -71,6 +71,189 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-typescript-genericity" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/01/20/typescript-genericity/" class="article-date">
+  <time class="dt-published" datetime="2021-01-20T07:47:20.000Z" itemprop="datePublished">2021-01-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/01/20/typescript-genericity/">typescript-genericity</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>希望一个函数或类支持多种数据类型 有很大的灵活性<br>不确定的数据类型，具体的使用类型在使用的时候才能确定</p>
+<h3 id="泛型-函数"><a href="#泛型-函数" class="headerlink" title="泛型 + 函数"></a>泛型 + 函数</h3><p>举例：实现一个函数输入什么返回什么</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; function log(val: string): string &#123;</span><br><span class="line">&#x2F;&#x2F;     console.log(val);</span><br><span class="line">&#x2F;&#x2F;     return val;</span><br><span class="line">&#x2F;&#x2F; &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="方案一：函数重载"><a href="#方案一：函数重载" class="headerlink" title="方案一：函数重载"></a>方案一：函数重载</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function log(val: string): string;</span><br><span class="line">function log(val: string[]): string[];</span><br><span class="line">function log(val: any): any &#123;</span><br><span class="line">    console.log(val);</span><br><span class="line">    return val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="方案二：联合类型"><a href="#方案二：联合类型" class="headerlink" title="方案二：联合类型"></a>方案二：联合类型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function log1(val: string | string[]): string | string[] &#123;</span><br><span class="line">    console.log(val);</span><br><span class="line">    return val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="方案三：使用泛型"><a href="#方案三：使用泛型" class="headerlink" title="方案三：使用泛型"></a>方案三：使用泛型</h5><p>保证了输入参数和返回值类型是一致的<br>如果使用 any 则不能保证输入参数和返回值类型是一致的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function log2&lt;T&gt;(val: T): T &#123;</span><br><span class="line">console.log(val);</span><br><span class="line">return val;</span><br><span class="line">&#125;</span><br><span class="line">log2&lt;string[]&gt;([&#39;aaa&#39;, &#39;bbb&#39;]);</span><br><span class="line">log2([&#39;aaa&#39;, &#39;bbb&#39;]); &#x2F;&#x2F; 推荐这么玩</span><br></pre></td></tr></table></figure>
+<p>不仅可以定义一个函数，也可以定义一个函数类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">type Logs &#x3D; &lt;T&gt;(val: T) &#x3D;&gt; T;</span><br><span class="line">let logs: Logs &#x3D; val &#x3D;&gt; val;</span><br><span class="line">logs([&#39;123&#39;, &#39;222&#39;]);</span><br><span class="line">logs(123);</span><br><span class="line"></span><br><span class="line">interface Log3 &#123;</span><br><span class="line">    &lt;T&gt;(val: T): T</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 这样接口的所有成员都受到泛型的约束</span><br><span class="line">interface Log4&lt;T&gt; &#123;</span><br><span class="line">    (val: T): T</span><br><span class="line">&#125;</span><br><span class="line">interface Log5&lt;T &#x3D; string&gt; &#123;</span><br><span class="line">    (val: T): T</span><br><span class="line">&#125;</span><br><span class="line">let log3: Log3 &#x3D; val &#x3D;&gt; val;</span><br><span class="line">let log4: Log4&lt;string&gt; &#x3D; val &#x3D;&gt; val;</span><br><span class="line">let log5: Log5 &#x3D; val &#x3D;&gt; val;</span><br><span class="line">let log6: Log5&lt;number&gt; &#x3D; val &#x3D;&gt; val;</span><br><span class="line">log3(123);</span><br><span class="line">log4(&#39;123&#39;);</span><br><span class="line">log5(&#39;123&#39;);</span><br><span class="line">log6(555);</span><br></pre></td></tr></table></figure>
+<h3 id="泛型-类"><a href="#泛型-类" class="headerlink" title="泛型 + 类"></a>泛型 + 类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class LogClass1&lt;T&gt; &#123;</span><br><span class="line">    run(val: T) &#123;</span><br><span class="line">        console.log(val);</span><br><span class="line">        return val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 可以给泛型赋默认值</span><br><span class="line">class LogClass2&lt;T &#x3D; number&gt; &#123;</span><br><span class="line">    run(val: T) &#123;</span><br><span class="line">        console.log(val);</span><br><span class="line">        return val;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 泛型不能应用于类的静态成员 报错静态成员不能引用类类型参数</span><br><span class="line">    &#x2F;&#x2F; static xiaoli(val: T): string &#123;</span><br><span class="line">    &#x2F;&#x2F;     return val;</span><br><span class="line">    &#x2F;&#x2F; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let logClass1 &#x3D; new LogClass1&lt;number&gt;();</span><br><span class="line">let logClass2 &#x3D; new LogClass1();</span><br><span class="line">let logClass3 &#x3D; new LogClass2();</span><br><span class="line">let logClass4 &#x3D; new LogClass2&lt;boolean&gt;();</span><br><span class="line">logClass1.run(123);</span><br><span class="line">logClass2.run(&#39;123&#39;);</span><br><span class="line">logClass3.run(123);</span><br><span class="line">logClass4.run(false);</span><br></pre></td></tr></table></figure>
+<h3 id="泛型的类型约束"><a href="#泛型的类型约束" class="headerlink" title="泛型的类型约束"></a>泛型的类型约束</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">interface Length &#123;</span><br><span class="line">    length: number;</span><br><span class="line">&#125;</span><br><span class="line">function getLength&lt;T extends Length&gt;(val: T): T &#123;</span><br><span class="line">    console.log(val, val.length);</span><br><span class="line">    return val;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 输入的 val 必须有 length 属性</span><br><span class="line">getLength(&#39;123&#39;);</span><br><span class="line">&#x2F;&#x2F; 报错</span><br><span class="line">getLength(123);</span><br></pre></td></tr></table></figure>
+<h3 id="总结-使用泛型的好处"><a href="#总结-使用泛型的好处" class="headerlink" title="总结 使用泛型的好处"></a>总结 使用泛型的好处</h3><p>函数和类能轻松支持多种类型，增强程序的扩展性<br>不必写多条函数重载、冗长的联合类型声明，增强代码的可读性<br>灵活控制类型之间的约束</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/01/20/typescript-genericity/" data-id="ckk58j2ar0004a4ksd32z39z9" data-title="typescript-genericity" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typeScript-share/" rel="tag">typeScript | share</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-typeScript-class" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/01/20/typeScript-class/" class="article-date">
+  <time class="dt-published" datetime="2021-01-20T06:32:11.000Z" itemprop="datePublished">2021-01-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/01/20/typeScript-class/">typeScript-class</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="类的成员修饰属性"><a href="#类的成员修饰属性" class="headerlink" title="类的成员修饰属性"></a>类的成员修饰属性</h3><table>
+<thead>
+<tr>
+<th>类的成员</th>
+<th>类的成员</th>
+<th>详细解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public</td>
+<td>共有成员</td>
+<td>类的所有属性默认都是 public 对所有人可见</td>
+</tr>
+<tr>
+<td>private</td>
+<td>私有成员</td>
+<td>类的私有成员只能被类的本身调用，不能被实例和子类调用</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>受保护成员</td>
+<td>受保护成员只能在类本身和子类调用，不能被实例化调用</td>
+</tr>
+<tr>
+<td>readonly</td>
+<td>只读属性</td>
+<td>只能读取，不能修改</td>
+</tr>
+<tr>
+<td>static</td>
+<td>静态成员</td>
+<td>静态成员只能通过类名来调用，而不能通过实例化来调用，可以被继承</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Dog &#123;</span><br><span class="line">    constructor(name: string) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line">    name: string;</span><br><span class="line"></span><br><span class="line">    run() &#123;  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 与es6相同：</span><br><span class="line">&#x2F;&#x2F; 类成员的属性都是实例属性，而不是原型属性</span><br><span class="line">&#x2F;&#x2F; 类成员的方法都是实例方法</span><br><span class="line">console.log(Dog.prototype);</span><br><span class="line">let dog &#x3D; new Dog(&#39;dog1&#39;);</span><br><span class="line">console.log(dog);</span><br><span class="line">&#x2F;&#x2F; 与es6不同：</span><br><span class="line">&#x2F;&#x2F; 实例的属性必须有初始值或被构造函数初始化</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 类的继承</span><br><span class="line">class DogSon extends Dog &#123;</span><br><span class="line">    constructor(name: string, color: string) &#123;</span><br><span class="line">        super(name);</span><br><span class="line">        this.color &#x3D; color;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    color: string;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Cat &#123;</span><br><span class="line">    &#x2F;&#x2F; 如果给 constructor 加上 private 修饰符，则类不能被实例化和继承</span><br><span class="line">    &#x2F;&#x2F; 如果给 constructor 加上 protected 修饰符，则类不能被实例化，只能被继承，即基类</span><br><span class="line">    &#x2F;&#x2F; 构造函数的参数也可以添加修饰符，将参数自动变成实例的属性，</span><br><span class="line">    constructor(name: string, public color: string) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line">    public name: string;</span><br><span class="line"></span><br><span class="line">    private pri() &#123;</span><br><span class="line">        console.log(&#39;私有哦&#39;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected pro() &#123;</span><br><span class="line">        console.log(&#39;受保护哦&#39;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    readonly times: string &#x3D; &#39;100&#39;;</span><br><span class="line"></span><br><span class="line">    static food: string &#x3D; &#39;mouse&#39;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>=================================================================</p>
+<h3 id="抽象类-abstract"><a href="#抽象类-abstract" class="headerlink" title="抽象类 abstract"></a>抽象类 abstract</h3><p>抽象类 不能被实例化 只能被继承<br>抽象类中可以使用 abstract 修饰方法不指定固定实现，即抽象方法<br>抽象方法可以明确子类对此方法有其他的实现，没必要在父类中实现了<br>可以抽离出一些事务的共性，有利于代码复用和拓展，实现多态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">abstract class Animal &#123;</span><br><span class="line">    constructor() &#123;  &#125;</span><br><span class="line"></span><br><span class="line">    eat() &#123; console.log(&#39;eat&#39;); &#125;</span><br><span class="line"></span><br><span class="line">    abstract sleep(): void;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Duck extends Animal&#123;</span><br><span class="line">    constructor(public name: string) &#123;</span><br><span class="line">        super();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    do() &#123;  &#125;</span><br><span class="line"></span><br><span class="line">    sleep() &#123;</span><br><span class="line">        console.log(&#39;我是Duck抽象方法在子类的实现&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let duck &#x3D; new Duck(&#39;鸭子&#39;);</span><br><span class="line">console.log(duck);</span><br><span class="line">duck.eat();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; ts的多态</span><br><span class="line">class Pig extends Animal&#123;</span><br><span class="line">    constructor(public name: string) &#123;</span><br><span class="line">        super();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sleep() &#123;</span><br><span class="line">        console.log(&#39;我是Pig抽象方法在子类的实现&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">let pig &#x3D; new Pig(&#39;猪&#39;);</span><br><span class="line">console.log(pig);</span><br><span class="line"></span><br><span class="line">let animals: Animal[] &#x3D; [duck, pig];</span><br><span class="line">console.log(animals);</span><br><span class="line">animals.forEach(item &#x3D;&gt; &#123;</span><br><span class="line">    item.sleep();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="this-的使用-方便链式调用"><a href="#this-的使用-方便链式调用" class="headerlink" title="this 的使用 方便链式调用"></a>this 的使用 方便链式调用</h4><p>this 的多态体现在父子类型的 this 可以相互再次调用，从而实现父子类调用的连贯性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class WorkFlow &#123;</span><br><span class="line">    constructor() &#123; &#125;</span><br><span class="line"></span><br><span class="line">    fn1() &#123; return this; &#125;</span><br><span class="line"></span><br><span class="line">    fn2() &#123; return this; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let workflow &#x3D; new WorkFlow();</span><br><span class="line">workflow.fn1().fn2();</span><br><span class="line"></span><br><span class="line">class MyFlow extends WorkFlow &#123;</span><br><span class="line">    next() &#123; return this; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let myflow &#x3D; new MyFlow();</span><br><span class="line">myflow.fn1().next().fn2().next();</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/01/20/typeScript-class/" data-id="ckk58j2af0000a4ks3a7n76lf" data-title="typeScript-class" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typeScript/" rel="tag">typeScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-typeScript" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/01/18/typeScript/" class="article-date">
+  <time class="dt-published" datetime="2021-01-18T06:15:23.000Z" itemprop="datePublished">2021-01-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/01/18/typeScript/">typeScript --- 入坑整配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="typeScript"><a href="#typeScript" class="headerlink" title="typeScript"></a>typeScript</h2><p>首先，准备 node 环境 + Vscode</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir &lt;dirName&gt;</span><br><span class="line">npm init -y</span><br><span class="line">npm i typescript -g</span><br><span class="line">tsc -h</span><br><span class="line">tsc --init</span><br></pre></td></tr></table></figure>
+<p>现在，你的 tsconfig.json 已经创建完成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tsc &lt;文件路径&gt; &#x2F;&#x2F; 查看ts编译的文件 或者可以去官网的tsplayground查看编译结果</span><br><span class="line"></span><br><span class="line">npm i webpack webpack-cli webpack-dev-server -D &#x2F;&#x2F; 配置webpack</span><br><span class="line">npm i ts-loader typescript -D &#x2F;&#x2F; 引入ts-loader</span><br><span class="line">npm i html-webpack-plugin -D &#x2F;&#x2F; html的加载模块</span><br><span class="line">npm i clean-webpack-plugin -D &#x2F;&#x2F; 清除dist打包文件</span><br><span class="line">npm i webpack-merge -D &#x2F;&#x2F; 合并配置项</span><br></pre></td></tr></table></figure>
+<p>项目目录如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">project</span><br><span class="line">│   packagejson</span><br><span class="line">│   README.md</span><br><span class="line">│   tsconfig.js</span><br><span class="line">│</span><br><span class="line">└───src</span><br><span class="line">│   │   index.ts</span><br><span class="line">│   │   ...</span><br><span class="line">│   │</span><br><span class="line">│   └───tpl</span><br><span class="line">│       │   index.html</span><br><span class="line">│       │   ...</span><br><span class="line">│       │   ...</span><br><span class="line">│</span><br><span class="line">└───build</span><br><span class="line">    │   webpack.base.config.js</span><br><span class="line">    │   webpack.config.js</span><br><span class="line">    │   webpack.dev.config.js</span><br><span class="line">    │   webpack.pro.config.js</span><br></pre></td></tr></table></figure>
+<p>================================================</p>
+<h3 id="webpack-base-config-js"><a href="#webpack-base-config-js" class="headerlink" title="webpack.base.config.js"></a>webpack.base.config.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">const HtmlWebpackPlugin &#x3D; require(&quot;html-webpack-plugin&quot;);</span><br><span class="line"></span><br><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">  entry: &quot;.&#x2F;src&#x2F;index.ts&quot;, &#x2F;&#x2F; 入口文件</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: &quot;app.js&quot;, &#x2F;&#x2F; 输出文件</span><br><span class="line">  &#125;,</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    extensions: [&quot;.js&quot;, &quot;.ts&quot;, &quot;.tsx&quot;],</span><br><span class="line">  &#125;,</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: &#x2F;\.tsx?$&#x2F;i,</span><br><span class="line">        use: [</span><br><span class="line">          &#123;</span><br><span class="line">            loader: &quot;ts-loader&quot;,</span><br><span class="line">          &#125;,</span><br><span class="line">        ],</span><br><span class="line">        exclude: &#x2F;node_modules&#x2F;,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    new HtmlWebpackPlugin(&#123;</span><br><span class="line">      template: &quot;.&#x2F;src&#x2F;tpl&#x2F;index.html&quot;,</span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const merge &#x3D; require(&quot;webpack-merge&quot;);</span><br><span class="line">const baseConfig &#x3D; require(&quot;.&#x2F;webpack.base.config&quot;);</span><br><span class="line">const devConfig &#x3D; require(&quot;.&#x2F;webpack.dev.config&quot;);</span><br><span class="line">const proConfig &#x3D; require(&quot;.&#x2F;webpack.pro.config&quot;);</span><br><span class="line"></span><br><span class="line">module.exports &#x3D; (env, argv) &#x3D;&gt; &#123;</span><br><span class="line">  let config &#x3D; argv.mode &#x3D;&#x3D;&#x3D; &quot;development&quot; ? devConfig : proConfig;</span><br><span class="line">  &#x2F;&#x2F; 合并配置文件</span><br><span class="line">  return merge(baseConfig, config);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="webpack-dev-config-js"><a href="#webpack-dev-config-js" class="headerlink" title="webpack.dev.config.js"></a>webpack.dev.config.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">    devtool: &#39;cheap-module-eval-source-map&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="webpack-pro-config-js"><a href="#webpack-pro-config-js" class="headerlink" title="webpack.pro.config.js"></a>webpack.pro.config.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">const &#123; CleanWebpackPlugin &#125; &#x3D; require(&quot;clean-webpack-plugin&quot;);</span><br><span class="line"></span><br><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">  plugins: [</span><br><span class="line">    &#x2F;&#x2F; 自动清空dist目录</span><br><span class="line">    new CleanWebpackPlugin(),</span><br><span class="line">  ],</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="package-json-注意修改-package-json-的入口配置"><a href="#package-json-注意修改-package-json-的入口配置" class="headerlink" title="package.json 注意修改 package.json 的入口配置"></a>package.json 注意修改 package.json 的入口配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;type-script&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;&quot;,</span><br><span class="line">  &quot;main&quot;: &quot;.&#x2F;src&#x2F;index.ts&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;start&quot;: &quot;webpack-dev-server --mode&#x3D;development --config .&#x2F;build&#x2F;webpack.config.js&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;webpack --mode&#x3D;production --config .&#x2F;build&#x2F;webpack.config.js&quot;,</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;keywords&quot;: [],</span><br><span class="line">  &quot;author&quot;: &quot;&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;clean-webpack-plugin&quot;: &quot;^3.0.0&quot;,</span><br><span class="line">    &quot;html-webpack-plugin&quot;: &quot;^3.2.0&quot;,</span><br><span class="line">    &quot;ts-loader&quot;: &quot;^8.0.11&quot;,</span><br><span class="line">    &quot;typescript&quot;: &quot;^4.1.2&quot;,</span><br><span class="line">    &quot;webpack&quot;: &quot;^4.35.2&quot;,</span><br><span class="line">    &quot;webpack-cli&quot;: &quot;^3.3.5&quot;,</span><br><span class="line">    &quot;webpack-dev-server&quot;: &quot;^3.7.2&quot;,</span><br><span class="line">    &quot;webpack-merge&quot;: &quot;^4.2.1&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/01/18/typeScript/" data-id="ckk58j2aq0003a4kscr5e66sy" data-title="typeScript --- 入坑整配置" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typeScript/" rel="tag">typeScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/01/16/hello-world/" class="article-date">
@@ -106,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/01/16/hello-world/" data-id="ckjzo0qog00005kksf8a975db" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/01/16/hello-world/" data-id="ckk58j2an0001a4ksdjdld56z" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -128,9 +311,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/typeScript/" rel="tag">typeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typeScript-share/" rel="tag">typeScript | share</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/typeScript/" style="font-size: 20px;">typeScript</a> <a href="/tags/typeScript-share/" style="font-size: 10px;">typeScript | share</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -147,6 +344,18 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/01/20/typescript-genericity/">typescript-genericity</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/20/typeScript-class/">typeScript-class</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/18/typeScript/">typeScript --- 入坑整配置</a>
+          </li>
         
           <li>
             <a href="/2021/01/16/hello-world/">Hello World</a>
