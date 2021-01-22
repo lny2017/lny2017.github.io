@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>typescript-interface | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="接口TypeScript 的核心原则之一是对值所具有的结构进行类型检查。它有时被称做“鸭式辨型法”或“结构性子类型化”。在 TypeScript 里，接口的作用就是为这些类型命名和为你的代码或第三方代码定义契约。 1234interface funObj &amp;#123;    readonly name: String    id: Number&amp;#125; 接口使用枚举类型 12345678910">
+<meta property="og:type" content="article">
+<meta property="og:title" content="typescript-interface">
+<meta property="og:url" content="http://example.com/2021/01/22/typescript-interface/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="接口TypeScript 的核心原则之一是对值所具有的结构进行类型检查。它有时被称做“鸭式辨型法”或“结构性子类型化”。在 TypeScript 里，接口的作用就是为这些类型命名和为你的代码或第三方代码定义契约。 1234interface funObj &amp;#123;    readonly name: String    id: Number&amp;#125; 接口使用枚举类型 12345678910">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-22T06:48:18.000Z">
+<meta property="article:modified_time" content="2021-01-22T08:58:26.506Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="typeScript | share">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-typescript-interface" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/01/22/typescript-interface/" class="article-date">
+  <time class="dt-published" datetime="2021-01-22T06:48:18.000Z" itemprop="datePublished">2021-01-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      typescript-interface
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>TypeScript 的核心原则之一是对值所具有的结构进行类型检查。<br>它有时被称做“鸭式辨型法”或“结构性子类型化”。<br>在 TypeScript 里，接口的作用就是为这些类型命名和为你的代码或第三方代码定义契约。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface funObj &#123;</span><br><span class="line">    readonly name: String</span><br><span class="line">    id: Number</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接口使用枚举类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">enum enms_001 &#123;</span><br><span class="line">    red,</span><br><span class="line">    green: &quot;green&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface TimeObj &#123;</span><br><span class="line">    col0: enms_001</span><br><span class="line">    col1: enms_001.red</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const timeObj: TimeObj &#x3D; &#123;</span><br><span class="line">  col0: enms_001.green,</span><br><span class="line">  col1: enms_001.red,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="readonly-vs-const"><a href="#readonly-vs-const" class="headerlink" title="readonly vs const"></a>readonly vs const</h4><p>最简单判断该用 readonly 还是 const 的方法是看要把它做为变量使用还是做为一个属性。<br>做为变量使用的话用 const，若做为属性则使用 readonly。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let arr_001: Array&lt;number | string&gt; &#x3D; [1, 2, 3];</span><br><span class="line">let arr_002: ReadonlyArray&lt;number | string&gt; &#x3D; arr_001; &#x2F;&#x2F; 数组arr_002只能读 或者执行不改变原数组的方法</span><br><span class="line">let arr_003: Array&lt;number | string&gt; &#x3D; [1, 2];</span><br><span class="line">arr_003 &#x3D; arr_001;</span><br><span class="line">arr_002 &#x3D; arr_003;</span><br><span class="line">&#x2F;&#x2F; arr_001 &#x3D; arr_002; &#x2F;&#x2F; 活值不能接受死值的赋值 报错</span><br><span class="line">arr_001 &#x3D; arr_002 as Array&lt;number&gt;; &#x2F;&#x2F; 但是你可以用类型断言重写</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="可选属性"><a href="#可选属性" class="headerlink" title="可选属性"></a>可选属性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">interface SquareConfig &#123;</span><br><span class="line">  color?: string;</span><br><span class="line">  width?: number;</span><br><span class="line">&#125;</span><br><span class="line">function createSquare(config: SquareConfig): &#123; color: string; area: number &#125; &#123;</span><br><span class="line">  &#x2F;&#x2F; ...</span><br><span class="line">  console.log(config);</span><br><span class="line">  return &#123;</span><br><span class="line">    color: &quot;111&quot;,</span><br><span class="line">    area: 100,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 对象字面量会被特殊对待而且会经过 额外属性检查，当将它们赋值给变量或作为参数传递的时候。</span><br><span class="line">&#x2F;&#x2F; 如果一个对象字面量存在任何“目标类型”不包含的属性时，你会得到一个错误。</span><br><span class="line">let mySquare &#x3D; createSquare(&#123; color: &quot;red&quot;, width: 100, time: 100 &#125;); &#x2F;&#x2F; Error</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 这样可以通过</span><br><span class="line">const createSquareParams &#x3D; &#123; color: &quot;red&quot;, width: 100, time: 100 &#125;;</span><br><span class="line">let mySquare &#x3D; createSquare(createSquareParams);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 绕开这些检查非常简单。 最简便的方法是使用类型断言：</span><br><span class="line">let mySquare &#x3D; createSquare(&#123;</span><br><span class="line">  color: &quot;red&quot;,</span><br><span class="line">  width: 100,</span><br><span class="line">  time: 100,</span><br><span class="line">&#125; as SquareConfig);</span><br></pre></td></tr></table></figure>
+<h4 id="更多属性"><a href="#更多属性" class="headerlink" title="更多属性"></a>更多属性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">interface baseConfig &#123;</span><br><span class="line">  id: number;</span><br><span class="line">  name: string;</span><br><span class="line">  [propName: string]: any;</span><br><span class="line">&#125;</span><br><span class="line">const fn000 &#x3D; (params: baseConfig): boolean &#x3D;&gt; &#123;</span><br><span class="line">  console.log(params);</span><br><span class="line">  return true;</span><br><span class="line">&#125;;</span><br><span class="line">fn000(&#123; id: 1, name: &quot;name&quot;, price: 1000 &#125;);</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="函数接口"><a href="#函数接口" class="headerlink" title="函数接口"></a>函数接口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">interface SearchFunc &#123;</span><br><span class="line">  (source: string, subString: number): boolean;</span><br><span class="line">&#125;</span><br><span class="line">let mySearch: SearchFunc &#x3D; (sou, subString) &#x3D;&gt; &#123;</span><br><span class="line">  let result &#x3D; sou &#x3D;&#x3D; subString.toString();</span><br><span class="line">  return result;</span><br><span class="line">&#125;;</span><br><span class="line">mySearch(&quot;2&quot;, 1); &#x2F;&#x2F; false</span><br></pre></td></tr></table></figure>
+<h4 id="定义函数的方式"><a href="#定义函数的方式" class="headerlink" title="定义函数的方式"></a>定义函数的方式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 函数接口的方案一</span><br><span class="line">let numberFn: (x: number, y: number) &#x3D;&gt; number;</span><br><span class="line">numberFn &#x3D; (x, y) &#x3D;&gt; x + y;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 函数接口的方案二</span><br><span class="line">interface AddFn &#123;</span><br><span class="line">    (x: number, y: number): number;</span><br><span class="line">&#125;</span><br><span class="line">let addFn: AddFn &#x3D; (x, y) &#x3D;&gt; x + y;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 函数接口的方案三 类型别名</span><br><span class="line">type Jian &#x3D; (x: number, y: number) &#x3D;&gt; number;</span><br><span class="line">let jian: Jian &#x3D; (x, y) &#x3D;&gt; x - y;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 方案四 函数定义</span><br><span class="line">function cheng1 (x: number, y: number): number &#123;</span><br><span class="line">    return x * y;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; ts函数类型推断省去返回值的类型</span><br><span class="line">function cheng2 (x: number, y: number) &#123;</span><br><span class="line">    return x * y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="混合类型接口"><a href="#混合类型接口" class="headerlink" title="混合类型接口"></a>混合类型接口</h4><p>即可以定义函数，也可以像对象一样，拥有属性和方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">interface Lib &#123;</span><br><span class="line">    (): void;</span><br><span class="line">    version: string;</span><br><span class="line">    doSomething(): void;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function getLib() &#123;</span><br><span class="line">    let lib: Lib &#x3D; (() &#x3D;&gt; &#123;&#125;) as Lib;</span><br><span class="line">    lib.version &#x3D; &#39;1.0.0&#39;;</span><br><span class="line">    lib.doSomething &#x3D; () &#x3D;&gt; &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    return lib;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let lib1 &#x3D; getLib();</span><br><span class="line">lib1();</span><br><span class="line">lib1.doSomething();</span><br><span class="line">lib1.version &#x3D; &#39;1.0.1&#39;;</span><br><span class="line"></span><br><span class="line">let lib2 &#x3D; getLib();</span><br><span class="line">lib2();</span><br><span class="line">lib2.doSomething();</span><br><span class="line">lib2.version &#x3D; &#39;1.0.2&#39;;</span><br></pre></td></tr></table></figure>
+<h4 id="函数的可选参数-必选参数必须在可选参数之前"><a href="#函数的可选参数-必选参数必须在可选参数之前" class="headerlink" title="函数的可选参数 必选参数必须在可选参数之前"></a>函数的可选参数 必选参数必须在可选参数之前</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function add5(x: number, y?: number) &#123;</span><br><span class="line">    return y ? x + y : x;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; console.log(add5(1));</span><br></pre></td></tr></table></figure>
+<p>带默认值 在必选参数前，默认值是不能省略的，必须明确传入 undefined 来获取默认值<br>必选参数之后的默认值可以不传</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function add6(x: number, y &#x3D; 2, z: number, t &#x3D; 1) &#123;</span><br><span class="line">    return x + y + z + t;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; console.log(add6(5, undefined, 3));</span><br></pre></td></tr></table></figure>
+<p>参数个数不确定 使用剩余参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function add7(x: number, ...rest: Array&lt;number&gt;) &#123;</span><br><span class="line">    return x + rest.reduce((pre, cur) &#x3D;&gt; pre + cur);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; console.log(add7(1, 2, 3, 4, 5, 6));</span><br></pre></td></tr></table></figure>
+<h4 id="函数重载"><a href="#函数重载" class="headerlink" title="函数重载"></a>函数重载</h4><p>静态语言类型（c++，java）两个函数名称相同，但是参数个数或类型不同，那么就函数重载，不需要为了相似功能的函数选用不同的函数名称 增加了函数的可读性<br>ts 函数重载的时候会去查询定义的列表（如下），尝试第一个定义，如果匹配的话，就使用匹配到的函数，不匹配继续向下查找，所以最容易匹配到的写在前边</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function add8(...rest: number[]): number;</span><br><span class="line">function add8(...rest: string[]): string;</span><br><span class="line">function add8(...rest: any[]): any &#123;</span><br><span class="line">    let first &#x3D; rest[0];</span><br><span class="line">    if (typeof first &#x3D;&#x3D; &#39;string&#39;) &#123;</span><br><span class="line">        return rest.join(&#39;&#39;);</span><br><span class="line">    &#125; else if (typeof first &#x3D;&#x3D; &#39;number&#39;) &#123;</span><br><span class="line">        return rest.reduce((pre, cur) &#x3D;&gt; pre + cur);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">console.log(add8(1, 2, 3, 4));</span><br><span class="line">console.log(add8(&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;));</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="对象接口"><a href="#对象接口" class="headerlink" title="对象接口"></a>对象接口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">interface List &#123;</span><br><span class="line">    readonly id: number; &#x2F;&#x2F; 只读属性不允许修改</span><br><span class="line">    name: string;</span><br><span class="line">    age?: number; &#x2F;&#x2F; 可选属性</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface Result &#123;</span><br><span class="line">    &#x2F;&#x2F; data: Array&lt;List&gt;</span><br><span class="line">    data: List[];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function render(result: Result) &#123;</span><br><span class="line">    result.data.map(item &#x3D;&gt; &#123;</span><br><span class="line">        console.log(item.id, item.name);</span><br><span class="line">        if (item.age) &#123;</span><br><span class="line">            console.log(item.age);</span><br><span class="line">            &#x2F;&#x2F; item.id++; &#x2F;&#x2F; 只读属性不允许修改</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="这样调用-sex-属性会被-ts-检测，sex-不在-List-预定范围中"><a href="#这样调用-sex-属性会被-ts-检测，sex-不在-List-预定范围中" class="headerlink" title="这样调用 sex 属性会被 ts 检测，sex 不在 List 预定范围中"></a>这样调用 sex 属性会被 ts 检测，sex 不在 List 预定范围中</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">render(&#123;</span><br><span class="line">    data: [</span><br><span class="line">        &#123; id: 1, name: &#39;小李&#39;, sex: &#39;男&#39; &#125;,</span><br><span class="line">        &#123; id: 2, name: &#39;张三&#39; &#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="解决方案一"><a href="#解决方案一" class="headerlink" title="解决方案一"></a>解决方案一</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let result &#x3D; &#123;</span><br><span class="line">    data: [</span><br><span class="line">        &#123; id: 1, name: &#39;小李&#39;, sex: &#39;男&#39; &#125;,</span><br><span class="line">        &#123; id: 2, name: &#39;张三&#39;, age: 200 &#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">render(result);</span><br></pre></td></tr></table></figure>
+<h5 id="解决方案二-都是类型断言的写法"><a href="#解决方案二-都是类型断言的写法" class="headerlink" title="解决方案二 都是类型断言的写法"></a>解决方案二 都是类型断言的写法</h5><p>建议使用这个 使用类型断言 告知编译器对象类型是 Result 绕过类型检查</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">render(&#123;</span><br><span class="line">    data: [</span><br><span class="line">        &#123; id: 1, name: &#39;小李&#39;, sex: &#39;男&#39; &#125;,</span><br><span class="line">        &#123; id: 2, name: &#39;张三&#39; &#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125; as Result);</span><br></pre></td></tr></table></figure>
+<p>在 React 中会产生歧义<br>使用类型断言 告知编译器对象类型是 Result 绕过类型检查</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">render(&lt;Result&gt; &#123;</span><br><span class="line">    data: [</span><br><span class="line">        &#123; id: 1, name: &#39;小李&#39;, sex: &#39;男&#39; &#125;,</span><br><span class="line">        &#123; id: 2, name: &#39;张三&#39; &#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="解决方案三-使用字符串索引签名-修改定义的-List-接口"><a href="#解决方案三-使用字符串索引签名-修改定义的-List-接口" class="headerlink" title="解决方案三 使用字符串索引签名 修改定义的 List 接口"></a>解决方案三 使用字符串索引签名 修改定义的 List 接口</h5><p>用任意的字符串去索引 List 可以得到任意的结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface List &#123;</span><br><span class="line">    id: number;</span><br><span class="line">    name: string;</span><br><span class="line">    [more: string]: any;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="接口混用"><a href="#接口混用" class="headerlink" title="接口混用"></a>接口混用</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface StringArray &#123;</span><br><span class="line">    [index: number]: string;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let strArr: StringArray &#x3D; [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];</span><br></pre></td></tr></table></figure>
+<p>数字和字符串索引混用接口<br>数字索引签名的返回值一定要是字符串索引签名的返回值的子类型（保持类型的兼容性） 因为 js 会进行类型转换 number 转化为 string</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface Names &#123;</span><br><span class="line">    [x: string]: string;</span><br><span class="line">    [y: number]: string;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>数字索引签名的返回值一定要是字符串索引签名的返回值的子类型（保持类型的兼容性） 因为 js 会进行类型转换 number 转化为 string</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface Namess &#123;</span><br><span class="line">    [x: string]: string | number;</span><br><span class="line">    [y: number]: number;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="类的接口"><a href="#类的接口" class="headerlink" title="类的接口"></a>类的接口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">interface Human &#123;</span><br><span class="line">    &#x2F;&#x2F; new(name: string): void;</span><br><span class="line">    name: string;</span><br><span class="line">    eat(): void;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Asian implements Human &#123;</span><br><span class="line">    constructor(public name: string) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    eat() &#123; &#125;</span><br><span class="line"></span><br><span class="line">    sleep() &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类类型接口 类实现接口的时候，必须实现所有的成员<br>接口只能约束类的功能成员 不能约束构造函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const asian &#x3D; new Asian(&#39;xiaoli&#39;);</span><br><span class="line">console.log(asian);</span><br></pre></td></tr></table></figure>
+<p>接口继承 一个接口可以继承多个接口<br>可以抽离出重用的接口，也可以将多个接口合并成一个接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">interface Man extends Human &#123;</span><br><span class="line">    run(): void;</span><br><span class="line">&#125;</span><br><span class="line">interface Child &#123;</span><br><span class="line">    cry(): void;</span><br><span class="line">&#125;</span><br><span class="line">interface Boy extends Man, Child &#123; &#125;;</span><br><span class="line"></span><br><span class="line">let boy: Boy &#x3D; &#123;</span><br><span class="line">    name: &#39;name&#39;,</span><br><span class="line">    run() &#123; &#125;,</span><br><span class="line">    eat() &#123; &#125;,</span><br><span class="line">    cry() &#123; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>接口继承类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Auto &#123;</span><br><span class="line">    state &#x3D; 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface AutoInterFace extends Auto &#123;</span><br><span class="line">    id: string;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class C implements AutoInterFace &#123;</span><br><span class="line">    state &#x3D; 1;</span><br><span class="line">    id &#x3D; &#39;100&#39;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>bus 继承 auto 实现 autointerface 接口<br>此处不必实现 state 属性，因为是 auto 的子类，继承了 state 属性<br>接口在抽离类的成员的时候，不仅抽离了公共成员，而且抽离了私有成员，受保护成员</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Bus extends Auto implements AutoInterFace &#123;</span><br><span class="line">    id &#x3D; &#39;1&#39;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h3><p>接口和类都可以继承自己的类型<br>接口继承：实现接口复用<br>类继承：实现方法和属性复用<br>接口可以通过类实现，只能约束类的 public 成员<br>接口可以抽离类的成员（public, private, protected）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/01/22/typescript-interface/" data-id="ckk81xz12000fw4ks0d5g5prz" data-title="typescript-interface" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typeScript-share/" rel="tag">typeScript | share</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/01/20/typescript-vue/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">typescript-vue</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/typeScript/" rel="tag">typeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typeScript-share/" rel="tag">typeScript | share</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/typeScript/" style="font-size: 10px;">typeScript</a> <a href="/tags/typeScript-share/" style="font-size: 10px;">typeScript | share</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/01/22/typescript-interface/">typescript-interface</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/20/typescript-vue/">typescript-vue</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/20/typescript-components/">typescript-components</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/20/typescript-genericity/">typescript-genericity</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/20/typeScript-class/">typeScript-class</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
